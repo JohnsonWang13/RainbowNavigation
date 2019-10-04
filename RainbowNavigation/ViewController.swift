@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController, RainbowColorSource {
     
     func navigationBarInColor() -> UIColor {
-        return UIColor(white: 0, alpha: 0)
+        return .red
     }
     
     var rainbowNavigation: RainbowNavigation?
@@ -39,16 +39,21 @@ class ViewController: UIViewController, RainbowColorSource {
     
     private func setupNavigationBar() {
         if !(self.navigationController?.navigationBar.rb.isNavigationViewExist ?? true) {
-            self.navigationController?.navigationBar.rb.backgroundColor = .clear
+            self.navigationController?.navigationBar.rb.backgroundColor = navigationBarInColor()
+            self.navigationController?.navigationBar.rb.statusBarColor = navigationBarInColor()
             self.rainbowNavigation = RainbowNavigation()
             self.rainbowNavigation?.wireTo(self.navigationController!)
         }
         
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .red
-        navigationController?.navigationBar.standardAppearance = appearance
-        
+        if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = navigationBarInColor()
+            navigationController?.navigationBar.standardAppearance = appearance
+        } else {
+            navigationController?.navigationBar.backgroundColor = navigationBarInColor()
+        }
+
         self.navigationController?.navigationBar.tintColor = .white
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "PingFangSC-Semibold", size: 16) ?? UIFont.systemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.white]
     }

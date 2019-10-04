@@ -43,7 +43,7 @@ class RainbowPushAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         if #available(iOS 13.0, *) {
             toVC.navigationController?.navigationBar.standardAppearance.backgroundColor = .clear
         } else {
-            // Fallback on earlier versions
+            toVC.navigationController?.navigationBar.backgroundColor = .clear
         }
         UIView.animate(withDuration: duration, delay: 0, options: .overrideInheritedOptions, animations: { () -> Void in
             
@@ -54,6 +54,7 @@ class RainbowPushAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 
             if let navigationColor = nextColor {
                 fromVC.navigationController?.navigationBar.rb.backgroundColor = navigationColor
+                fromVC.navigationController?.navigationBar.rb.statusBarColor = navigationColor
             }
             
             }) { (finished) -> Void in
@@ -66,7 +67,7 @@ class RainbowPushAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 if #available(iOS 13.0, *) {
                     toVC.navigationController?.navigationBar.standardAppearance.backgroundColor = nextColor
                 } else {
-                    // Fallback on earlier versions
+                    toVC.navigationController?.navigationBar.backgroundColor = nextColor
                 }
         }
     }

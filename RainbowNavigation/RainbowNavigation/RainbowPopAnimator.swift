@@ -47,7 +47,7 @@ class RainbowPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         if #available(iOS 13.0, *) {
             toVC.navigationController?.navigationBar.standardAppearance.backgroundColor = .clear
         } else {
-            // Fallback on earlier versions
+            toVC.navigationController?.navigationBar.backgroundColor = .clear
         }
         
         UIView.animate(withDuration: duration, delay: 0, options: .curveLinear, animations: { () -> Void in
@@ -56,6 +56,7 @@ class RainbowPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             shadowMask.alpha = 0
             if let navigationColor = nextColor {
                 fromVC.navigationController?.navigationBar.rb.backgroundColor = navigationColor
+                fromVC.navigationController?.navigationBar.rb.statusBarColor = navigationColor
             }
             
             }) { (finished) -> Void in
@@ -67,7 +68,7 @@ class RainbowPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 if #available(iOS 13.0, *) {
                     toVC.navigationController?.navigationBar.standardAppearance.backgroundColor = self.finishCancel ? oldColor:nextColor
                 } else {
-                    // Fallback on earlier versions
+                    toVC.navigationController?.navigationBar.backgroundColor = self.finishCancel ? oldColor:nextColor
                 }
         }
     }

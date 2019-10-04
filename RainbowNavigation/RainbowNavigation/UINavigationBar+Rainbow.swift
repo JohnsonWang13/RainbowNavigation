@@ -34,7 +34,7 @@ private var kRainbowAssociatedKey = "kRainbowAssociatedKey"
                 navigationBar.setBackgroundImage(UIImage(), for: .default)
                 navigationBar.isTranslucent = true
                 navigationBar.shadowImage = UIImage()
-                navigationView = UIView(frame: CGRect(x: 0, y: -UIApplication.shared.statusBarFrame.height, width: navigationBar.bounds.width, height: navigationBar.bounds.height + UIApplication.shared.statusBarFrame.height))
+                navigationView = UIView(frame: CGRect(x: 0, y: 0, width: navigationBar.bounds.width, height: navigationBar.bounds.height))
                 navigationView?.isUserInteractionEnabled = false
                 navigationView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                 navigationBar.insertSubview(navigationView!, at: 0)
